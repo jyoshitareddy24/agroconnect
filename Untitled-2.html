@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIET SPORTS CLUB</title>
+    <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            font-variant: small-caps;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f5f5dc; /* Cream color background */
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #0d47a1; /* Dark blue gradient color */
+            background: -webkit-linear-gradient(45deg, #0d47a1, #1976d2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 20px 0;
+            font-size: 3em;
+            text-align: center;
+        }
+        .main-container {
+            width: 90%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+        }
+        .menu-item {
+            background: linear-gradient(45deg, #87CEFA, #00BFFF); /* Sky blue gradient */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.5em;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu-item:hover {
+            background: linear-gradient(45deg, #00BFFF, #1E90FF); /* Darker blue on hover */
+        }
+        .login-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
+        }
+        .login-popup h2 {
+            margin-top: 0;
+            position: relative;
+        }
+        .login-popup h2 .close-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .login-popup input {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .login-popup button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .login-popup button:hover {
+            background-color: #45a049;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+        .form-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+        }
+        .form-container input, .form-container textarea, .form-container select, .form-container button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .form-container label {
+            width: 100%;
+            text-align: left;
+            margin: 10px 0 5px;
+        }
+		
+		
+		
+		
+		
+		
+		
+		
+		.hamburger-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.hamburger-menu .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #0d47a1; /* Dark blue color */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Add this to your existing CSS */
+#mainMenuItems {
+    display: none; /* Initially hide the main menu items */
+    position: absolute;
+    top: 50px; /* Adjust according to your layout */
+    right: 20px; /* Adjust according to your layout */
+    background: #f5f5dc; /* Same as background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.menu-item-small {
+    display: block;
+    color: #0d47a1; /* Dark blue color */
+    text-decoration: none;
+    font-size: 0.8em; /* Smaller font size */
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.menu-item-small:hover {
+    background-color: #e0e0e0; /* Slight grey background on hover */
+    border-radius: 4px;
+}
+
+.hamburger-menu.open .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-menu.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.open .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+		
+		
+		
+		
+		
+    </style>
+</head>
+<body>
+
+
+
+<div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<div id="mainMenuItems">
+    <a href="upload_results.html" class="menu-item-small">UPLOAD RESULTS</a>
+</div>
+
+
+
+
+
+
+
+
+    <h1>BIET SPORTS CLUB</h1>
+    <div class="main-container" id="mainContainer">
+        <div class="main-menu">
+            <a href="#" class="menu-item" onclick="openPopup('add')">ADD EVENTS</a>
+            <a href="#" class="menu-item" onclick="openPopup('edit')">EDIT EVENTS</a>
+            <a href="#" class="menu-item" onclick="openInfoPopup()">INFO</a>
+            <a href="#" class="menu-item" onclick="openResultsPopup()">RESULTS</a>
+        </div>
+    </div>
+
+        <div class="overlay" id="overlay"></div>
+
+    <div class="login-popup" id="loginPopup">
+        <h2>Login <span class="close-btn" onclick="closePopup()">×</span></h2>
+        <input type="text" id="userId" placeholder="User ID">
+        <input type="password" id="userPass" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div class="form-container" id="addEventForm">
+        <h2>Add Event</h2>
+        <label for="eventName">Event</label>
+        <input type="text" id="eventName" placeholder="Event Name">
+        <label for="eventType">Select Event Type</label>
+        <select id="eventType">
+            <option value="" disabled selected>Select Event Type</option>
+            <option value="Indoor">Indoor</option>
+            <option value="Outdoor">Outdoor</option>
+        </select>
+        <label for="teamName">Team Name</label>
+        <input type="text" id="teamName" placeholder="Team Name">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate">
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate">
+        <label for="eventTime">Event Time</label>
+        <input type="time" id="eventTime">
+        <label for="description">Greetings, Rules and Regulations</label>
+        <textarea id="description" placeholder="Description"></textarea>
+        <button onclick="submitEvent()">Submit</button>
+        <button onclick="logout('addEventForm')">Logout</button>
+    </div>
+
+    <div class="form-container" id="editEventForm">
+        <h2>Edit Event</h2>
+        <label for="selectEvent">Select Event</label>
+        <select id="selectEvent" onchange="loadTeams()">
+            <option value="" disabled selected>Select Event</option>
+            <!-- Dynamically populated options -->
+        </select>
+        <label for="selectTeam">Select Team</label>
+        <select id="selectTeam" onchange="populateEditForm()">
+            <option value="" disabled selected>Select Team</option>
+            <!-- Dynamically populated options -->
+        </select>
+        <label for="editEventName">Event</label>
+        <input type="text" id="editEventName" placeholder="Event Name" disabled>
+        <label for="editEventType">Select Event Type</label>
+        <select id="editEventType" disabled>
+            <option value="" disabled selected>Select Event Type</option>
+            <option value="Indoor">Indoor</option>
+            <option value="Outdoor">Outdoor</option>
+        </select>
+        <label for="editTeamName">Team Name</label>
+        <input type="text" id="editTeamName" placeholder="Team Name" disabled>
+        <label for="editStartDate">Start Date</label>
+        <input type="date" id="editStartDate" disabled>
+        <label for="editEndDate">End Date</label>
+        <input type="date" id="editEndDate" disabled>
+        <label for="editEventTime">Event Time</label>
+        <input type="time" id="editEventTime" disabled>
+        <label for="editDescription">Greetings, Rules and Regulations</label>
+        <textarea id="editDescription" placeholder="Description" disabled></textarea>
+        <label for="teamMembers">Team Members</label>
+        <textarea id="teamMembers" placeholder="Enter team members, one per line"></textarea>
+        <label for="substitutePlayers">Substitute Players</label>
+        <textarea id="substitutePlayers" placeholder="Enter substitute players, one per line"></textarea>
+        <label for="teamCaptain">Team Captain</label>
+        <input type="text" id="teamCaptain" placeholder="Team Captain">
+        <label for="teamCoach">Team Coach</label>
+        <input type="text" id="teamCoach" placeholder="Team Coach">
+        <button onclick="updateEvent()">Update</button>
+        <button onclick="deleteTeam()">Delete</button>
+        <button onclick="logout('editEventForm')">Logout</button>
+    </div>
+
+    <!-- INFO section -->
+    <div class="form-container" id="infoForm">
+        <h2>INFO</h2>
+        <label for="infoEvent">Select Event</label>
+        <select id="infoEvent" onchange="loadInfoTeams()">
+            <option value="" disabled selected>Select Event</option>
+            <!-- Dynamically populated options -->
+        </select>
+        <label for="infoTeam">Select Team</label>
+        <select id="infoTeam" onchange="displayInfo()">
+            <option value="" disabled selected>Select Team</option>
+            <!-- Dynamically populated options -->
+        </select>
+        <div id="infoDisplay">
+            <!-- Information display -->
+        </div>
+        <button onclick="closeInfoPopup()">Close</button>
+    </div>
+
+
+<!-- RESULTS section -->
+ <div class="form-container" id="resultsForm">
+        <h2>Results</h2>
+        <label for="resultsEvent">Select Event</label>
+        <select id="resultsEvent" onchange="loadTeamsForResults()">
+            <option value="" disabled selected>Select Event</option>
+            <!-- Dynamically populated options -->
+        </select>
+        <button onclick="showResults()">Show Results</button>
+        <button onclick="logout('resultsForm')">Logout</button>
+    </div>
+
+
+
+    <!-- Your existing JavaScript code -->
+
+    <script>
+        let eventsData = JSON.parse(localStorage.getItem('eventsData')) || {};
+
+        function openPopup(section) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('loginPopup').style.display = 'block';
+            document.getElementById('loginPopup').dataset.section = section;
+        }
+
+        function closePopup() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('userId').value = ''; // Clear user ID field
+            document.getElementById('userPass').value = ''; // Clear password field
+        }
+
+        function login() {
+    var userId = document.getElementById('userId').value;
+    var userPass = document.getElementById('userPass').value;
+    var section = document.getElementById('loginPopup').dataset.section;
+
+    if (userId === 'user' && userPass === 'userpass') {
+        if (section === 'add') {
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('addEventForm').style.display = 'flex';
+            document.getElementById('mainContainer').style.display = 'none';
+        } else if (section === 'edit') {
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('editEventForm').style.display = 'flex';
+            document.getElementById('mainContainer').style.display = 'none';
+            populateEditEventDropdown();
+        } else {
+            window.location.href = section + ".html";
+        }
+        document.getElementById('overlay').style.display = 'none';
+        
+        
+    } else {
+        alert('Invalid credentials');
+    }
+}
+
+
+        function submitEvent() {
+    var eventName = document.getElementById('eventName').value;
+    var eventType = document.getElementById('eventType').value;
+    var teamName = document.getElementById('teamName').value;
+    var startDate = document.getElementById('startDate').value;
+    var endDate = document.getElementById('endDate').value;
+    var eventTime = document.getElementById('eventTime').value;
+    var description = document.getElementById('description').value;
+
+    // Check if event name and team name are empty
+    if (eventName.trim() === '' || teamName.trim() === '') {
+        alert('Event name and team name are mandatory fields.');
+        return; // Stop the function execution
+    }
+
+    if (!eventsData[eventName]) {
+        eventsData[eventName] = {
+            eventType: eventType,
+            startDate: startDate,
+            endDate: endDate,
+            eventTime: eventTime,
+            description: description,
+            teams: {}
+        };
+    }
+
+    eventsData[eventName].teams[teamName] = {
+        teamName: teamName,
+        members: [],
+        substitutes: [],
+        captain: '',
+        coach: ''
+    };
+
+    localStorage.setItem('eventsData', JSON.stringify(eventsData));
+    alert('Event added successfully');
+
+    // Clear the input fields after submission
+    document.getElementById('eventName').value = '';
+    document.getElementById('eventType').value = '';
+    document.getElementById('teamName').value = '';
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+    document.getElementById('eventTime').value = '';
+    document.getElementById('description').value = '';
+}
+
+
+        function populateEditEventDropdown() {
+            var selectEvent = document.getElementById('selectEvent');
+            selectEvent.innerHTML = '<option value="" disabled selected>Select Event</option>';
+            for (var event in eventsData) {
+                var option = document.createElement('option');
+                option.value = event;
+                option.text = event;
+                selectEvent.add(option);
+            }
+        }
+
+        function loadTeams() {
+            var selectedEvent = document.getElementById('selectEvent').value;
+            var selectTeam = document.getElementById('selectTeam');
+            selectTeam.innerHTML = '<option value="" disabled selected>Select Team</option>';
+            for (var team in eventsData[selectedEvent].teams) {
+                var option = document.createElement('option');
+                option.value = team;
+                option.text = team;
+                selectTeam.add(option);
+            }
+        }
+
+
+
+
+
+
+
+
+        function populateEditForm() {
+    var selectedEvent = document.getElementById('selectEvent').value;
+    var selectedTeam = document.getElementById('selectTeam').value;
+    if (eventsData[selectedEvent] && eventsData[selectedEvent].teams[selectedTeam]) {
+        var event = eventsData[selectedEvent];
+        var team = eventsData[selectedEvent].teams[selectedTeam];
+
+        document.getElementById('editEventName').value = selectedEvent;
+        document.getElementById('editEventType').value = event.eventType;
+        document.getElementById('editTeamName').value = selectedTeam;
+        document.getElementById('editStartDate').value = event.startDate;
+        document.getElementById('editEndDate').value = event.endDate;
+        document.getElementById('editEventTime').value = event.eventTime;
+        document.getElementById('editDescription').value = event.description;
+        document.getElementById('teamMembers').value = team.members.join('\n');
+        document.getElementById('substitutePlayers').value = team.substitutes.join('\n');
+        document.getElementById('teamCaptain').value = team.captain;
+        document.getElementById('teamCoach').value = team.coach;
+
+        // Enable input fields
+        document.getElementById('editEventName').disabled = false;
+        document.getElementById('editEventType').disabled = false;
+        document.getElementById('editTeamName').disabled = false;
+        document.getElementById('editStartDate').disabled = false;
+        document.getElementById('editEndDate').disabled = false;
+        document.getElementById('editEventTime').disabled = false;
+        document.getElementById('editDescription').disabled = false;
+        document.getElementById('teamMembers').disabled = false;
+        document.getElementById('substitutePlayers').disabled = false;
+        document.getElementById('teamCaptain').disabled = false;
+        document.getElementById('teamCoach').disabled = false;
+    }
+}
+
+function updateEvent() {
+    var selectedEvent = document.getElementById('selectEvent').value;
+    var selectedTeam = document.getElementById('selectTeam').value;
+
+    var teamMembers = document.getElementById('teamMembers').value.split('\n');
+    var substitutePlayers = document.getElementById('substitutePlayers').value.split('\n');
+    var teamCaptain = document.getElementById('teamCaptain').value;
+    var teamCoach = document.getElementById('teamCoach').value;
+    var eventName = document.getElementById('editEventName').value;
+    var eventType = document.getElementById('editEventType').value;
+    var teamName = document.getElementById('editTeamName').value;
+    var startDate = document.getElementById('editStartDate').value;
+    var endDate = document.getElementById('editEndDate').value;
+    var eventTime = document.getElementById('editEventTime').value;
+    var description = document.getElementById('editDescription').value;
+
+    if (eventsData[selectedEvent] && eventsData[selectedEvent].teams[selectedTeam]) {
+        eventsData[selectedEvent].teams[selectedTeam].members = teamMembers;
+        eventsData[selectedEvent].teams[selectedTeam].substitutes = substitutePlayers;
+        eventsData[selectedEvent].teams[selectedTeam].captain = teamCaptain;
+        eventsData[selectedEvent].teams[selectedTeam].coach = teamCoach;
+
+        // Update event details
+        eventsData[selectedEvent].eventType = eventType;
+        eventsData[selectedEvent].startDate = startDate;
+        eventsData[selectedEvent].endDate = endDate;
+        eventsData[selectedEvent].eventTime = eventTime;
+        eventsData[selectedEvent].description = description;
+
+        // Update team name if changed
+        if (selectedTeam !== teamName) {
+            eventsData[selectedEvent].teams[teamName] = eventsData[selectedEvent].teams[selectedTeam];
+            delete eventsData[selectedEvent].teams[selectedTeam];
+        }
+
+        localStorage.setItem('eventsData', JSON.stringify(eventsData));
+        alert('Event updated successfully');
+    } else {
+        alert('Selected team or event does not exist.');
+    }
+}
+
+
+
+
+
+
+
+
+        function deleteTeam() {
+            var selectedEvent = document.getElementById('selectEvent').value;
+            var selectedTeam = document.getElementById('selectTeam').value;
+
+            if (eventsData[selectedEvent] && eventsData[selectedEvent].teams[selectedTeam]) {
+                delete eventsData[selectedEvent].teams[selectedTeam];
+                localStorage.setItem('eventsData', JSON.stringify(eventsData));
+                alert('Team deleted successfully');
+                loadTeams();
+                document.getElementById('editEventForm').reset();
+            } else {
+                alert('Selected team or event does not exist.');
+            }
+        }
+
+        function logout(formId) {
+		// Reload the page to show a fresh login
+        location.reload();
+            document.getElementById(formId).style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'flex';
+            document.getElementById('userId').value = ''; // Clear user ID field
+            document.getElementById('userPass').value = ''; // Clear password field
+            
+        }
+
+        document.getElementById('overlay').onclick = closePopup;
+
+
+
+
+
+
+
+
+
+
+        function openInfoPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('infoForm').style.display = 'flex';
+            // Hide the main menu
+            document.getElementById('mainContainer').style.display = 'none';
+            populateInfoEventDropdown();
+        }
+
+        function closeInfoPopup() {
+		location.reload();
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('infoForm').style.display = 'none';
+            // Display the main menu again
+            document.getElementById('mainContainer').style.display = 'flex';
+        }
+
+        function populateInfoEventDropdown() {
+        var infoEvent = document.getElementById('infoEvent');
+        infoEvent.innerHTML = '<option value="" disabled selected>Select Event</option>';
+        for (var event in eventsData) {
+            var option = document.createElement('option');
+            option.value = event;
+            option.text = event;
+            infoEvent.add(option);
+        }
+    }
+
+    function loadInfoTeams() {
+        var selectedEvent = document.getElementById('infoEvent').value;
+        var infoTeam = document.getElementById('infoTeam');
+        infoTeam.innerHTML = '<option value="" disabled selected>Select Team</option>';
+        for (var team in eventsData[selectedEvent].teams) {
+            var option = document.createElement('option');
+            option.value = team;
+            option.text = team;
+            infoTeam.add(option);
+        }
+    }
+
+
+
+
+
+
+
+    function displayInfo() {
+    var selectedEvent = document.getElementById('infoEvent').value;
+    var selectedTeam = document.getElementById('infoTeam').value;
+    var infoDisplay = document.getElementById('infoDisplay');
+
+    if (eventsData[selectedEvent] && eventsData[selectedEvent].teams[selectedTeam]) {
+        var team = eventsData[selectedEvent].teams[selectedTeam];
+        var eventDetails = eventsData[selectedEvent];
+
+        infoDisplay.innerHTML = `
+            <h3>Event Information</h3>
+            <p><strong>Event Type:</strong> ${eventDetails.eventType}</p>
+            <p><strong>Start Date:</strong> ${eventDetails.startDate}</p>
+            <p><strong>End Date:</strong> ${eventDetails.endDate}</p>
+            <p><strong>Time:</strong> ${eventDetails.eventTime}</p>
+            <p><strong>Greetings and Rules:</strong> ${eventDetails.description}</p>
+            
+            <h3>Team Information</h3>
+            <p><strong>Team Members:</strong><br>${team.members.join('<br>')}</p>
+            <p><strong>Substitute Players:</strong><br>${team.substitutes.join('<br>')}</p>
+            <p><strong>Team Captain:</strong> ${team.captain}</p>
+            <p><strong>Team Coach:</strong> ${team.coach}</p>
+        `;
+    } else {
+        infoDisplay.innerHTML = '<p>No information available.</p>';
+    }
+}
+
+
+
+// results section JavaScript from here
+
+ function openResultsPopup() {
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('resultsForm').style.display = 'flex';
+            populateResultsEventDropdown();
+        }
+
+function populateResultsEventDropdown() {
+            const resultsEventDropdown = document.getElementById('resultsEvent');
+            const events = ['Event 1', 'Event 2', 'Event 3']; // Replace with dynamic data
+
+            events.forEach(event => {
+                const option = document.createElement('option');
+                option.value = event;
+                option.textContent = event;
+                resultsEventDropdown.appendChild(option);
+            });
+        }
+
+        function loadTeamsForResults() {
+            // Logic to load teams based on selected event in results form
+        }
+
+        function showResults() {
+            alert('Showing results...');
+        }
+
+
+
+		
+		
+		
+		
+		function toggleMenu() {
+    var menuButton = document.querySelector('.hamburger-menu');
+    var mainMenuItems = document.getElementById('mainMenuItems');
+    menuButton.classList.toggle('open');
+    mainMenuItems.style.display = mainMenuItems.style.display === 'none' || mainMenuItems.style.display === '' ? 'block' : 'none';
+}
+		
+		
+    </script>
+</body>
+</html>
